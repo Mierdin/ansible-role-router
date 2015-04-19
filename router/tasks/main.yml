@@ -1,0 +1,9 @@
+---
+  - include_vars: "{{ansible_os_family}}.yml"
+
+  - name: Main routing config File
+    template: src={{ conftemplate }} dest={{ conffile }}
+
+  - name: Apply changes
+    shell: sudo sysctl -p {{ conffile }}
+    notify: Apply sysctl changes
